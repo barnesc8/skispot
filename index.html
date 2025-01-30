@@ -1,42 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>SkiSpot</title>
-    <meta name="description" content="An imformational site about ski mountains in the East">
-    <meta name="author" content="Charlie Barnes">
-    <link rel="icon" type="image/png" href="./images/favicon_io">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigenère Cipher Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h2>Visit SkiSpot!</h2>
-        <nav>
-            <a href="#
-                <img src= <img alt="SkiSpot"
-            <a href="#">Location <img src="Ski_003.jpg" alt="Gore"></a>
-            <a href="#">Terrain <img src="Landing-Whiteface-View-Jordan-Craig_1920x950.jpg" alt="Whiteface"></a>
-            <a href="#">Skill Level <img src="killington_aerial.jpg" alt="Killington"></a>
-        </nav>
-    </header>
-    <main>
-        <div>
-            <h1>SkiSpot</h1>
-        </div>
+    <h2>Vigenère Cipher Decoder</h2>
+    <input type="text" id="ciphertext" placeholder="Enter encrypted text">
+    <input type="text" id="key" placeholder="Enter key">
+    <button onclick="decodeVigenere()">Decode</button>
+    <h3>Decrypted Text:</h3>
+    <p id="result"></p>
 
-        <h2>Location</h2>
-        <h2>Skill Level</h2>
-        <h2>Location</h2>
-        
-        <div>
-        <h3>Gore Mountain (just for embed)</h3>
-        </div>
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d37003.224669955074!2d-74.05521144963724!3d43.67499133997552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sgore%20mountain!5e1!3m2!1sen!2sus!4v1707758168613!5m2!1sen!2sus" 
-                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </main>
-    <footer>
-        <p><strong>SkiSpot, the best spot to start skiing today!</strong></p>>
-    </footer>
+    <script>
+        function decodeVigenere() {
+            let ciphertext = document.getElementById("ciphertext").value.toUpperCase();
+            let key = document.getElementById("key").value.toUpperCase();
+            let decryptedText = "";
+            let keyIndex = 0;
+
+            for (let i = 0; i < ciphertext.length; i++) {
+                let charCode = ciphertext.charCodeAt(i);
+                if (charCode >= 65 && charCode <= 90) { // A-Z
+                    let keyChar = key[keyIndex % key.length].charCodeAt(0) - 65;
+                    let decryptedChar = String.fromCharCode(((charCode - 65 - keyChar + 26) % 26) + 65);
+                    decryptedText += decryptedChar;
+                    keyIndex++;
+                } else {
+                    decryptedText += ciphertext[i];
+                }
+            }
+            document.getElementById("result").textContent = decryptedText;
+        }
+    </script>
 </body>
-</html>        
+</html>
